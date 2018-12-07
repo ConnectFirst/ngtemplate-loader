@@ -51,11 +51,12 @@ app.directive('testDirective', function() {
 });
 ```
 
-### `relativeTo` and `prefix`
+### `relativeTo`, `prefix` and `customOutput`
 
 You can set the base path of your templates using `relativeTo` and `prefix` parameters. `relativeTo` is used
-to strip a matching prefix from the absolute path of the input html file. `prefix` is then appended to path.
-
+to strip a matching prefix from the absolute path of the input html file. `prefix` is then appended to path. `customOutput`
+is used to allow custom definition of the output file path using webpack interpolation.
+ 
 The prefix of the path up to and including the first `relativeTo` match is stripped, e.g.
 
 ``` javascript
@@ -75,6 +76,12 @@ You can combine `relativeTo` and `prefix` to replace the prefix in the absolute 
 ``` javascript
 require('!ngtemplate?relativeTo=src/&prefix=build/!html!/test/src/test.html');
 // c.put('build/test.html', ...)
+```
+
+`customOutput` e.g.
+
+```
+    [folder]/[name].[ext] => src/main.js
 ```
 
 ### `module`
