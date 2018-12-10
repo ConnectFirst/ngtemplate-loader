@@ -9,7 +9,8 @@ module.exports = function (content) {
     var ngModule = getAndInterpolateOption.call(this, 'module', 'ng'); // ng is the global angular module that does not need to explicitly required
     var relativeTo = getAndInterpolateOption.call(this, 'relativeTo', '');
     var prefix = getAndInterpolateOption.call(this, 'prefix', '');
-    var customOutput = getAndInterpolateOption.call(this, 'output', '');
+
+    var removeLeadingSlash = !!options.removeLeadingSlash || false;
     var requireAngular = !!options.requireAngular || false;
     var absolute = false;
     var pathSep = options.pathSep || '/';
@@ -32,7 +33,6 @@ module.exports = function (content) {
         relativeTo = relativeTo.replace(pathSepRegex, pathSep);
         prefix = prefix.replace(pathSepRegex, pathSep);
         resource = resource.replace(pathSepRegex, pathSep);
-        customOutput = customOutput.replace(pathSepRegex, pathSep);
     }
 
     var relativeToIndex = resource.indexOf(relativeTo);
@@ -47,8 +47,8 @@ module.exports = function (content) {
         .replace(new RegExp(escapeRegExp(pathSep) + '+', 'g'), pathSep);
 
 
-    if(customOutput && customOutput.length) {
-        filePath = customOutput;
+    if(removeLeadingSlash) {
+        filePath = filePath.replace('/', '');
     }
 
     var html;

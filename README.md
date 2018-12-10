@@ -51,11 +51,9 @@ app.directive('testDirective', function() {
 });
 ```
 
-### `relativeTo`, `prefix` and `output`
-
+### `relativeTo`, `prefix` 
 You can set the base path of your templates using `relativeTo` and `prefix` parameters. `relativeTo` is used
-to strip a matching prefix from the absolute path of the input html file. `prefix` is then appended to path. `output`
-is used to allow custom definition of the output file path using webpack interpolation.
+to strip a matching prefix from the absolute path of the input html file. `prefix` is then appended to path.
  
 The prefix of the path up to and including the first `relativeTo` match is stripped, e.g.
 
@@ -78,12 +76,6 @@ require('!ngtemplate?relativeTo=src/&prefix=build/!html!/test/src/test.html');
 // c.put('build/test.html', ...)
 ```
 
-`output` e.g.
-
-```
-    [folder]/[name].[ext] => src/main.js
-```
-
 ### `module`
 
 By default ngTemplate loader adds a run method to the global 'ng' module which does not need to explicitly required by your app.
@@ -94,6 +86,9 @@ require('!ngtemplate?module=myTemplates&relativeTo=/projects/test/app!html!file.
 // => returns the javascript:
 // angular.module('myTemplates').run(['$templateCache', function(c) { c.put('file.html', '<file.html processed by html-loader>') }]);
 ```
+
+### `removeLeadingSlash`
+will remove the leading slash from the template url
 
 ### Parameter Interpolation
 
